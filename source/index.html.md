@@ -76,175 +76,80 @@ Phone-number format used: E.164
 
 For API tools, like Postman use *Add to* = **query params**
 
-# Kittens
+# Phone Numbers
 
-## Get All Kittens
+## Create new User with a Phone Number, Full Name and US state
+**POST** method
 
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
-
-```shell
-curl "http://example.com/api/kittens" \
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
-```
-
-> The above command returns JSON structured like this:
-
+### Endpoint URL: https://<url:port>/store/phone-number
+Payload body:
 ```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
+{
+    “phoneNumber”: “+14131234567”,
+    “fullName”: “John Doe”,
+    “state”: “MA”
+}
 ```
 
-This endpoint retrieves all kittens.
+> The above command may return the following:
 
-### HTTP Request
+* 200 OK User successfully created. User id is <user_id>
+* 401 Unathorized You’re trying to access the endpoint with wrong Authorization creds/method/etc
+* 403 Forbidden You lack certain permission to perform this request
 
-`GET http://example.com/api/kittens`
 
-### Query Parameters
-
-Parameter | Default | Description
+Code | Status | Message
 --------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
+200 | OK | User successfully created. User id is <user_id>
+401 | Unathorized | You’re trying to access the endpoint with wrong Authorization creds/method/etc
+403 | Forbidden | You lack certain permission to perform this request
 
 <aside class="success">
-Remember — a happy kitten is an authenticated kitten!
+Remember — a happy call is an authenticated request!
 </aside>
 
-## Get a Specific Kitten
+## Get a Specific Phone Number
 
-```ruby
-require 'kittn'
+### Endpoint URL: https://<url:port>/users/search
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
 
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2" \
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
-```
-
-> The above command returns JSON structured like this:
+> Params
 
 ```json
 {
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
+  “searchCriteria”: “fullName” | “user_id”,
+  “searchCriteriaValue”: “John Doe” | “user_id”
 }
 ```
+GET request can be done both by Full Name or user ID.
 
-This endpoint retrieves a specific kitten.
 
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+Response:
+* 200 OK
+* Body: {“phoneNumber”: “+14131234567”}
 
-### HTTP Request
 
-`GET http://example.com/kittens/<ID>`
+If you’re an Administrator user, you can get all users’ phone numbers.
+Params:
+“searchCriteria”: “fullName” | “user_id”
+“searchCriteriaValue”: “[ALL]”
 
-### URL Parameters
 
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
-
-## Delete a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.delete(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.delete(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2" \
-  -X DELETE \
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.delete(2);
-```
-
-> The above command returns JSON structured like this:
-
+**PUT**
+* Endpoint URL: https://<url:port>/store/phone-number/<user_id>
+* Payload body:
 ```json
 {
-  "id": 2,
-  "deleted" : ":("
+    “fullName”: “John Doe-Herz”,
+    “state”: “CA”
 }
 ```
 
-This endpoint deletes a specific kitten.
+Response:
+200 OK
 
-### HTTP Request
-
-`DELETE http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to delete
+**DELETE**
+Endpoint URL: https://<url:port>/users/<user_id>
+Response:
+204 No Content
 
