@@ -20,56 +20,61 @@ code_clipboard: true
 
 meta:
   - name: description
-    content: Documentation for the Kittn API
+    content: Documentation for the Disqo API Assignment
 ---
 
 # Introduction
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+Welcome to the **Phone Number API**! You can use our API to access Phone Number API endpoints, which can get Phone information on various users, based on their Full Name or User ID.
 
 We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
 
-This example API documentation page was created with [Slate](https://github.com/slatedocs/slate). Feel free to edit it and use it as a base for your own API's documentation.
 
 # Authentication
 
 > To authorize, use this code:
 
 ```ruby
-require 'kittn'
+require 'phone_number'
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
+api = Phone_number::APIClient.authorize!('hash_code')
 ```
 
-```python
-import kittn
+```python3
+import phone_number
 
-api = kittn.authorize('meowmeowmeow')
+api = phone_number.authorize('hash_code')
 ```
 
 ```shell
 # With shell, you can just pass the correct header with each request
-curl "api_endpoint_here" \
-  -H "Authorization: meowmeowmeow"
+curl "https://<url:port>" \
+  -H "Authorization: hash_code"
 ```
 
 ```javascript
-const kittn = require('kittn');
+const phone_number = require('phone_number');
 
-let api = kittn.authorize('meowmeowmeow');
+let api = phone_number.authorize('hash_code');
 ```
 
 > Make sure to replace `meowmeowmeow` with your API key.
 
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
+API keys allow access to the Phone Number API. You can register a new Phone Number API key at our [developer portal](http://example.com/developers).
 
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
+API key to be included in all API requests to the server in a header that looks like the following:
 
-`Authorization: meowmeowmeow`
+`Authorization: hash_token`
 
 <aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+You must replace <code>hash_token</code> with your personal API key.
 </aside>
+
+<aside class="warning">
+Phone-number format used: E.164
+</aside>
+
+For API tools, like Postman use *Add to* = **query params**
 
 # Kittens
 
